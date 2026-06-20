@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>竞技宝 · 场景导向导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', 'PingFang SC', sans-serif;
+            background: #f4f6fb;
+            color: #1e2b3c;
+            line-height: 1.6;
+        }
+
+        /* 深色头图区域 */
+        .hero {
+            background: linear-gradient(145deg, #0f1923 0%, #1a2b3c 100%);
+            color: #e8edf3;
+            padding: 3.5rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -20%;
+            width: 70%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 1.2rem;
+            color: #b8c9dd;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: rgba(255,255,255,0.08);
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            color: #bcd0e8;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* 浅色正文区 + 导航式卡片网格 */
+        .site-nav {
+            max-width: 1120px;
+            margin: -1.5rem auto 2rem;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .site-nav a {
+            background: #ffffff;
+            padding: 0.6rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 500;
+            color: #1a2b3c;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            transition: 0.2s ease;
+            border: 1px solid #eaedf2;
+            font-size: 0.95rem;
+        }
+
+        .site-nav a:hover {
+            background: #eef2f9;
+            border-color: #c4d0e0;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+        }
+
+        .content {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+        }
+
+        .intro-section {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2.5rem 2.2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.02);
+        }
+
+        .intro-section h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #0f1a28;
+            letter-spacing: -0.3px;
+        }
+
+        .intro-section p {
+            margin-bottom: 1.2rem;
+            color: #2e4058;
+        }
+
+        .intro-section .link-embed {
+            color: #2563eb;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px dotted #85a9e6;
+            transition: 0.15s;
+        }
+
+        .intro-section .link-embed:hover {
+            color: #1d4ed8;
+            border-bottom-style: solid;
+        }
+
+        .highlight-accent {
+            color: #2563eb;
+        }
+
+        /* 三个场景模块 — 轻量卡片 */
+        .scenes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0 2.5rem;
+        }
+
+        .scene-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 1.6rem 1.8rem;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+            transition: 0.2s ease;
+            border: 1px solid #eaedf2;
+        }
+
+        .scene-card:hover {
+            border-color: #d4ddee;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.04);
+        }
+
+        .scene-card .emoji-badge {
+            font-size: 1.9rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .scene-card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            color: #0f1a28;
+        }
+
+        .scene-card p {
+            font-size: 0.95rem;
+            color: #3d4f66;
+            margin-bottom: 0.3rem;
+        }
+
+        .scene-card .meta-hint {
+            font-size: 0.85rem;
+            color: #6f829b;
+            margin-top: 0.6rem;
+            border-top: 1px solid #eceff5;
+            padding-top: 0.6rem;
+        }
+
+        .faq-mini {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.02);
+        }
+
+        .faq-mini h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: #0f1a28;
+        }
+
+        .faq-item {
+            margin-bottom: 1.2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #edf1f8;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            color: #1a2b3c;
+            margin-bottom: 0.3rem;
+        }
+
+        .faq-item p {
+            color: #3d4f66;
+            font-size: 0.95rem;
+        }
+
+        .footer-note {
+            text-align: center;
+            padding: 2rem 1rem 2.5rem;
+            font-size: 0.9rem;
+            color: #6a7d96;
+            border-top: 1px solid #dce3ed;
+            margin-top: 2.5rem;
+        }
+
+        .footer-note a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #8aafe6;
+        }
+
+        .footer-note a:hover {
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 2.5rem 1.2rem 3rem;
+            }
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .site-nav {
+                gap: 0.7rem;
+            }
+            .site-nav a {
+                padding: 0.4rem 1.2rem;
+                font-size: 0.85rem;
+            }
+            .intro-section {
+                padding: 1.8rem 1.2rem;
+            }
+            .scene-card {
+                padding: 1.5rem 1.2rem;
+            }
+            .faq-mini {
+                padding: 1.5rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="tagline">轻量导航 · 场景先导</div>
+        <h1>从用途出发，快速认识竞技宝</h1>
+        <p>不绕弯子，不堆砌概念——用你熟悉的场景帮你建立印象。</p>
+    </header>
+
+    <nav class="site-nav">
+        <a href="#identify">功能介绍</a>
+        <a href="#scenes">常见场景</a>
+        <a href="#faq">说明</a>
+    </nav>
+
+    <main class="content">
+        <!-- 核心介绍：从识别目的切入 -->
+        <section class="intro-section" id="identify">
+            <h2>你来找什么？</h2>
+            <p>
+                很多人第一次来到这个域名，第一反应是：这是做什么的？它能解决我的哪些问题？<br>
+                简单来说，<a href="https://root-jjbdianjing.com" class="link-embed">竞技宝</a> 所关联的服务方向，主要围绕赛事数据、信息整合与互动体验展开。如果你对赛程节奏、队伍状态、历史对比等感兴趣，这里提供了一种轻量的信息查阅方式。
+            </p>
+            <p>
+                它不是万能的工具，但在特定领域——比如快速定位某场比赛的概况、回顾关键节点——能帮你节省四处翻找的时间。我们不夸大效用，只希望你用着顺手。
+            </p>
+        </section>
+
+        <!-- 三个场景模块 -->
+        <div id="scenes">
+            <h2 style="font-weight:500; font-size:1.5rem; margin-bottom:0.3rem; color:#0f1a28;">三个常见使用场景</h2>
+            <p style="color:#4b5f79; margin-bottom:1.2rem;">根据多数用户的反馈，以下情境中使用频率较高。</p>
+            <div class="scenes-grid">
+                <div class="scene-card">
+                    <div class="emoji-badge">📋</div>
+                    <h3>赛前快速浏览</h3>
+                    <p>比赛日之前，想看一眼对阵形势、近期交手记录或积分变化。不用翻多个页面，这里的信息层次比较简洁，适合快速建立背景。</p>
+                    <div class="meta-hint">常见于周末或大型赛事前</div>
+                </div>
+                <div class="scene-card">
+                    <div class="emoji-badge">📊</div>
+                    <h3>赛后数据回顾</h3>
+                    <p>比赛结束后，想核查关键数据（如局内经济差、击杀时间轴）。<a href="https://root-jjbdianjing.com" class="link-embed">竞技宝</a> 提供的部分摘要维度，可以当作辅助参考，不必依赖记忆。</p>
+                    <div class="meta-hint">适合复盘爱好者</div>
+                </div>
+                <div class="scene-card">
+                    <div class="emoji-badge">🔍</div>
+                    <h3>横向信息对比</h3>
+                    <p>同时关注多支队伍或联赛时，并排查看基础数据比切换标签页更省力。页面结构对移动端也做了适配，通勤路上也能瞄一眼。</p>
+                    <div class="meta-hint">关注多赛区的用户常用</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 常见说明 (FAQ 摘要) -->
+        <section class="faq-mini" id="faq">
+            <h2>一些常见说明</h2>
+            <div class="faq-item">
+                <strong>这个平台是官方的吗？</strong>
+                <p>它是一个独立的信息整合与展示站点，与赛事组织方无直接隶属关系。我们更建议你把它当作一个辅助查阅渠道，官方信息请以赛事方公告为准。</p>
+            </div>
+            <div class="faq-item">
+                <strong>数据更新频率如何？</strong>
+                <p>基础赛程和结果会在比赛结束后尽快同步，部分深度统计可能需要一定处理时间。如果发现临时延迟，稍后再试即可。</p>
+            </div>
+            <div class="faq-item">
+                <strong>是否需要注册或付费？</strong>
+                <p>目前浏览公开信息不需要注册，也没有隐藏付费。未来是否会增加附加功能，以实际页面更新为准。</p>
+            </div>
+            <div class="faq-item">
+                <strong>移动端体验怎么样？</strong>
+                <p>我们对小屏幕做了适配。卡片和导航重新排列，文字大小也保持可读。如果在某款设备上显示异常，欢迎通过页面底部反馈渠道告知。</p>
+            </div>
+        </section>
+
+        <div class="footer-note">
+            如果你觉得这个导航对你有帮助，不妨收藏 <a href="https://root-jjbdianjing.com">竞技宝</a> 以备后续使用。<br>
+            页面内容仅供参考，不构成任何决策建议。
+        </div>
+    </main>
+</body>
+</html>
