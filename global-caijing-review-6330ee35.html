@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>彩经网 · 数据工具导航</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f3f5f8;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    a:hover {
+      border-bottom-color: #2563eb;
+    }
+
+    /* 容器 */
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* 顶部导航 */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .nav-brand {
+      font-weight: 600;
+      font-size: 1.35rem;
+      color: #0f172a;
+      letter-spacing: 0.5px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      color: #334155;
+      border: none;
+    }
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+
+    /* 主标题区 */
+    .hero {
+      text-align: center;
+      padding: 56px 0 48px;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 14px;
+    }
+    .hero p {
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: #475569;
+    }
+
+    /* 核心介绍卡片 */
+    .intro-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border: 1px solid #e9edf2;
+      padding: 36px 40px;
+      margin-bottom: 44px;
+    }
+    .intro-card h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: #1e293b;
+    }
+    .intro-card p {
+      margin-bottom: 16px;
+      color: #334155;
+    }
+    .intro-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 三个场景模块 */
+    .scenes {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .scene-item {
+      background: #ffffff;
+      border-radius: 14px;
+      border: 1px solid #e9edf2;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      padding: 28px 24px;
+    }
+    .scene-item h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #0f172a;
+    }
+    .scene-item p {
+      font-size: 0.95rem;
+      color: #475569;
+    }
+
+    /* 常见说明 (FAQ 摘要) */
+    .faq-wrap {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid #e9edf2;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      padding: 32px 36px;
+      margin-bottom: 48px;
+    }
+    .faq-wrap h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+      color: #1e293b;
+    }
+    .faq-item {
+      padding: 14px 0;
+      border-bottom: 1px solid #edf1f6;
+    }
+    .faq-item:last-of-type {
+      border-bottom: none;
+    }
+    .faq-item strong {
+      display: block;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .faq-item span {
+      color: #475569;
+      font-size: 0.95rem;
+    }
+
+    /* 页脚 */
+    .footer {
+      text-align: center;
+      padding: 28px 0 40px;
+      font-size: 0.9rem;
+      color: #64748b;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 12px;
+    }
+
+    /* 响应式 */
+    @media (max-width: 820px) {
+      .scenes {
+        grid-template-columns: 1fr 1fr;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+    }
+    @media (max-width: 580px) {
+      .scenes {
+        grid-template-columns: 1fr;
+      }
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .intro-card {
+        padding: 24px 20px;
+      }
+      .faq-wrap {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- 导航 -->
+    <header class="nav">
+      <div class="nav-brand">彩经网</div>
+      <div class="nav-links">
+        <a href="#intro">简介</a>
+        <a href="#scenes">使用场景</a>
+        <a href="#faq">常见说明</a>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>数据视角 · 信息工具</h1>
+      <p>快速判断网站属性与用途，降低反复试探的时间成本。<br>
+      下面从几个维度介绍 <a href="https://global-caijing.com">彩经网</a> 的实际定位。</p>
+    </section>
+
+    <!-- 核心介绍 -->
+    <section id="intro" class="intro-card">
+      <h2>网站定位与基础判断</h2>
+      <p><a href="https://global-caijing.com">彩经网</a> 是一个以财经与数据信息聚合为方向的站点，内容涵盖市场动态、指标解读以及结构化资讯。整体界面偏重信息罗列与分类检索，适合需要快速浏览多个数据维度的用户。</p>
+      <p>从域名与结构来看，该站并非单一工具型页面，而是围绕“经”与“彩”两个关键词展开内容组织。用户可以将其视为一个财经资讯集合点，便于横向对比不同数据源的描述差异。</p>
+      <p>如果你关注市场数据或信息归类，<a href="https://global-caijing.com">彩经网</a> 提供了一个相对紧凑的浏览入口。建议首次使用时先扫视首页分区，了解信息层级后再深入具体栏目。</p>
+    </section>
+
+    <!-- 三个场景模块 -->
+    <section id="scenes" class="scenes">
+      <div class="scene-item">
+        <h3>快速归类</h3>
+        <p>面对多个数据来源时，借助该站的结构化列表，可以更快识别出哪些信息属于同一类别，减少在不同页面间切换的盲目性。</p>
+      </div>
+      <div class="scene-item">
+        <h3>术语对照</h3>
+        <p>部分栏目对同一指标使用了不同表述。在 <a href="https://global-caijing.com">彩经网</a> 中浏览时，能自然积累常见术语的变体表达，有助于后续阅读其他平台内容。</p>
+      </div>
+      <div class="scene-item">
+        <h3>趋势感知</h3>
+        <p>通过观察站内信息的更新频率与板块变化，可以大致感知当前哪些话题或数据维度被重点呈现，辅助判断外部关注度的分布。</p>
+      </div>
+    </section>
+
+    <!-- FAQ 摘要 -->
+    <section id="faq" class="faq-wrap">
+      <h2>常见说明</h2>
+      <div class="faq-item">
+        <strong>这个网站主要提供什么？</strong>
+        <span>以财经信息聚合为主，内容涵盖市场数据、指标解读及分类资讯。不涉及交易建议或承诺收益。</span>
+      </div>
+      <div class="faq-item">
+        <strong>信息更新频率如何？</strong>
+        <span>视具体栏目而定，部分数据类内容会随外部源同步，资讯板块则根据编辑节奏更新。建议以站内发布时间为准。</span>
+      </div>
+      <div class="faq-item">
+        <strong>是否需要注册才能使用？</strong>
+        <span>浏览绝大部分内容不需要注册。部分交互功能或个性化设置可能需要账号，具体情况请参照站内提示。</span>
+      </div>
+      <div class="faq-item">
+        <strong>与其他财经站的区别是什么？</strong>
+        <span><a href="https://global-caijing.com">彩经网</a> 的页面布局偏重信息密度和分类索引，更适合希望快速浏览多个数据维度的用户，而非深度长文章阅读。</span>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>基于公开信息整理 · 仅供参考</p>
+    </footer>
+  </div>
+</body>
+</html>
