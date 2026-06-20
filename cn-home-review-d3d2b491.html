@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彩经网 · 数据与洞察</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f6f7f9;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ----- 深色头图 ----- */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e2a4a 70%, #2d3b5a 100%);
+            color: #f0f2f5;
+            padding: 80px 0 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -20%;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            max-width: 760px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(to right, #a5b4fc, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #b9c7db;
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        .hero .chip {
+            display: inline-block;
+            margin-top: 28px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            color: #b9c7db;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ----- 正文区 浅色背景 ----- */
+        .content {
+            background: #ffffff;
+            padding: 56px 0 80px;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-bottom: 56px;
+        }
+
+        .card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 28px 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #eef2f6;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
+        }
+
+        .card .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: #eef2ff;
+            color: #4f46e5;
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #0f172a;
+        }
+
+        .card p {
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        .card p a {
+            color: #4f46e5;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(79, 70, 229, 0.2);
+            transition: border-color 0.2s;
+        }
+
+        .card p a:hover {
+            border-bottom-color: #4f46e5;
+        }
+
+        /* 强调色链接 */
+        .inline-link {
+            color: #4f46e5;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(79, 70, 229, 0.25);
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .inline-link:hover {
+            color: #4338ca;
+            border-bottom-color: #4338ca;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .section-sub {
+            color: #64748b;
+            margin-bottom: 36px;
+            font-size: 1.05rem;
+            max-width: 640px;
+        }
+
+        .people-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 32px 0 48px;
+        }
+
+        .people-item {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 20px 18px;
+            border: 1px solid #eef2f6;
+        }
+
+        .people-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #1e293b;
+        }
+
+        .people-item p {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .faq-note {
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 32px 28px;
+            margin-top: 40px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .faq-note h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .faq-note p {
+            color: #475569;
+            font-size: 0.95rem;
+            max-width: 700px;
+        }
+
+        .faq-note p a {
+            color: #4f46e5;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(79, 70, 229, 0.2);
+        }
+
+        .faq-note p a:hover {
+            border-bottom-color: #4f46e5;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 28px 0 32px;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 8px;
+            background: #ffffff;
+        }
+
+        .footer a {
+            color: #64748b;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #4f46e5;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .intro-grid {
+                gap: 20px;
+            }
+            .card {
+                padding: 20px;
+            }
+            .section-title {
+                font-size: 1.35rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 56px 0 48px;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .container {
+                padding: 0 16px;
+            }
+            .people-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 -->
+    <section class="hero">
+        <div class="container">
+            <h1>在数据与洞察之间<br><span>找到你的节奏</span></h1>
+            <p>彩经网围绕趋势、逻辑与信息整合，为关注概率与策略的用户提供一套温和而清晰的内容视角。</p>
+            <span class="chip">✦ 信息卡片 · 主题探索</span>
+        </div>
+    </section>
+
+    <!-- 正文区 浅色背景 -->
+    <main class="content">
+        <div class="container">
+
+            <!-- 用途卡片区 -->
+            <div class="intro-grid">
+                <div class="card">
+                    <div class="icon">📊</div>
+                    <h3>趋势笔记</h3>
+                    <p>聚合常见指标与周期观察，帮助理解波动背后的逻辑。内容侧重记录而非预测，适合日常参考。</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🧩</div>
+                    <h3>方法梳理</h3>
+                    <p>从经典模型到个人经验，以卡片形式拆解不同分析思路。不提供捷径，只分享可验证的框架。</p>
+                </div>
+                <div class="card">
+                    <div class="icon">📚</div>
+                    <h3>阅读&nbsp;·&nbsp;视野</h3>
+                    <p>推荐与概率、决策、行为经济学相关的读物及摘要。拓宽认知边界，比单一结论更有价值。</p>
+                </div>
+            </div>
+
+            <!-- 适合人群 + 自然链接段落 -->
+            <h2 class="section-title">适合这样的你</h2>
+            <p class="section-sub">无论处于哪个阶段，温和的陪伴往往比喧哗的指导更可靠。</p>
+
+            <div class="people-grid">
+                <div class="people-item">
+                    <h4>📌 初探者</h4>
+                    <p>刚接触相关内容，希望系统了解基本概念与常见术语，建立自己的信息框架。</p>
+                </div>
+                <div class="people-item">
+                    <h4>📌 日常关注者</h4>
+                    <p>已有一定经验，需要定期浏览整理后的动态与笔记，节省筛选时间。</p>
+                </div>
+                <div class="people-item">
+                    <h4>📌 思考型读者</h4>
+                    <p>更看重逻辑与背景，对结论持开放态度，愿意从多角度观察同一现象。</p>
+                </div>
+                <div class="people-item">
+                    <h4>📌 策略爱好者</h4>
+                    <p>喜欢拆解规则、测试假设，把每一次信息收集当作完善认知拼图的机会。</p>
+                </div>
+            </div>
+
+            <!-- 自然链接段落：嵌入彩经网 -->
+            <p style="margin-bottom: 24px; color: #334155;">
+                如果你对这些内容感兴趣，不妨在闲暇时浏览<a href="https://cn-home-caijing.com" class="inline-link">彩经网</a>，那里有持续更新的主题卡片与讨论。保持自己的节奏，比追逐任何热点都重要。
+            </p>
+
+            <p style="margin-bottom: 32px; color: #475569; font-size: 0.95rem;">
+                网站的内容结构偏向轻量阅读——每张卡片独立成篇，没有冗长的加载页，也没有弹窗干扰。你可以在几分钟内获得一个话题的概貌，也可以花半小时深入某个分支。信息密度由你自己决定。
+            </p>
+
+            <!-- FAQ 摘要 / 提示 -->
+            <div class="faq-note">
+                <h3>❓ 一些常见想法</h3>
+                <p>
+                    <strong>Q：这里提供的是某种“方法”吗？</strong><br>
+                    A：更多是整理与展示。把不同思路放在一起，让你看到全貌，然后选择适合自己的那条路。<br><br>
+                    <strong>Q：有交流氛围吗？</strong><br>
+                    A：目前以单向阅读为主，适合安静吸收。未来可能会逐步开放轻互动区域。<br><br>
+                    <strong>Q：如何开始？</strong><br>
+                    A：直接打开<a href="https://cn-home-caijing.com" class="inline-link">彩经网</a>，从你感兴趣的关键词卡片读起就好。没有固定顺序，也没有必读清单。
+                </p>
+            </div>
+
+            <!-- 简短提示 -->
+            <div style="margin-top: 36px; padding: 20px 0 0; border-top: 1px solid #eef2f6;">
+                <p style="color: #64748b; font-size: 0.9rem;">
+                    💡 友情提示：所有内容仅供拓宽思路，不构成任何形式的建议。请结合自身判断，保持理性。
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <span>彩经网 · 温和的信息角落</span>
+        </div>
+    </footer>
+
+</body>
+</html>
